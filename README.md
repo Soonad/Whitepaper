@@ -1,63 +1,105 @@
-# How to improve the world with Moonad
+# Moonad: a Peer-to-Peer Operating System
 
-1. Build a massively parallel processor, [LPU](https://github.com/MaiaVictor/parallel_lambda_computer_tests), based in an alien tech called [SIC](https://github.com/MaiaVictor/symmetric-interaction-calculus).
+**Abstract.** We present the design of a minimal, decentralized operating system, aiming to solve different problems with existing computer architectures, programming languages, package managers and operating systems. Instead of assembly, its low-level machine language is based on a massively parallel graph-reduction system capable of performing optimal evaluation of λ-calculus terms. A massively parallel processor (ICPU) is also proposed. Instead of C, it is built on top of a proof and programming language which can use Curry-Howard's isomorphism to state and prove mathematical theorems about its own programs. Instead of usual package manager, a type-queryable repository of code is used. Instead of local files, an encrypted, distributed file system is used. A decentralized smart-contacts platform is built-in for faut-toleran online applications, digital payments and self-enforced agreements (smart contracts). It makes use of state-of-art insights from programming language theory which, despite existing and solving real world programs, are seldom used on industry. This leads to the design of a massively parallel operating system which improves existing ones in several senses and levels, which will elaborate later on.
 
-2. Build on top of it a minimalist proof language, [Formality](https://github.com/moonad/Formality), that will merge mathematics and programming.
+## Why?
 
-3. Build a Linux-like operating system, [Moonad](https://github.com/moonad/moonad), replacing CPU/ASM/C by LPU/SIC/Formality.
+Moonad comes from the realizations that our computers, operating systems, programming languages and package managers are much more primitive than they should be. The last few decades of research gave us breakthroughs on the fields of software security, computer architectures, programming languages, which are barely used in practice.
 
-4. Integrate with distributed storages [IPFS](https://ipfs.io)/[Swarm](https://swarm-guide.readthedocs.io/en/latest/introduction.html), and smart-contract platforms like [Ethereum](https://www.ethereum.org).
+For any software-related fiasco news you see, there is existing technology capable of solving it trivially, yet we still struggle with them on a daily basis.
 
-5. Build a worldwide, queryable, type-indexed repository of algorithms, proofs and DApps (like [Hoogle](https://www.haskell.org/hoogle/)).
+From a **security** perspective, we had a single, small malicious package [cause an entire ecossystem to collapse](https://www.npmjs.com/package/left-pad), [twice](https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident). We have been dealing with SQL and JavaScript injections since the birth of the internet. It has been 2k years since the first mathematical proof was published, yet we still lose absurd amounts of money for bugs like the [heartbleed](http://heartbleed.com) and [TheDAO](https://medium.com/@ogucluturk/the-dao-hack-explained-unfortunate-take-off-of-smart-contracts-2bd8c8db3562). Bugs and malwares are widespread on the industry, sometimes causing [airplanes to crash](https://www.ndtv.com/world-news/boeing-737-max-crash-was-software-to-blame-and-what-comes-next-2007893), hospitals to [stop operating](https://www.forbes.com/sites/leemathews/2018/11/28/ransomware-attack-disrupts-emergency-services-at-ohio-hospital/). Imagine a world without bugs and malwares: this is actually possible with existing technologies, we're just not using them. Here, we will explain how an operating system built on top of a proof language can improve, if not solve, all those problems.
 
-6. People start building things on it and it will go exponential because it is better than anything that ever existed.
+From a **performance** perspective, our most widely used programming languages have several, unavoidable inefficiencies that, by design, make them many times slower than existing alternatives. Our CPUs are built using sequential models of computation that have hit a bottleneck and stagnated. The recent rise of GPUs for high-performance computing doesn't fully solve this problem because the way we're used to build software still relies profoundly on sequential idioms such as `for-loops`. Even if our languages were more GPU-friendly, the necessity for ASICs in applications such as crypto-currency mining shows that even GPUs are still not making perfect use of the underlying computing capabilities of our physical world. Imagine if we had processors for arbitrary programs that couldn't be subsumed by ASICs? Here, we will propose a general-purpose, massively parallel computer architecture that is optimal up to the laws of physics.
 
-7. ...?
+From a **productivity** perspective, we are extremelly inefficient. When it comes to features, our programming languages lag behind theory. Java took decades to implement lambdas. JavaScript took years to figure out monads (and failed). Modern languages such as Go struggle with aspects as simple as polymorphic datatypes. On top of that, we never wasted as much developer time. By searching, for example, ["def mergesort" filetype:py](https://www.google.com/search?ei=zmOOXNKxDY_E5OUPiLq5mAs&q=%22def+mergesort%22+filetype%3Apy&oq=%22def+mergesort%22+filetype%3Apy&gs_l=psy-ab.3..0i71l8.7645.7645..7650...0.0..0.0.0.......0....2j1..gws-wiz.6UEn0LSx0FI), we get 454 results - 454 re-implementations of the same particular function in the same particular language - and chances are this number is hugely underestimated. Imagine if all that wasted time was spent somewhere else? Here, we will explain how several type-theory insights can lead us to unprecedented developer productive boosts.
 
-8. At this point the cancer is probably cured, mars is colonized global warming is reversed.
+Note that this kind of improductivity doesn't affect only developers. Mathematical publishing is in an even worse state. In the apex of the compute era, findings and publications are still communicated through primitive, computer-inaccessible, text-based languages. Once you realize proofs are just code, the entire academic system becomes a huge, inefficient and paid package manager. Citations can be seen as manual imports and peer-reviewing is just an error-prone, human-laboured type-checker. Errors in earlier works propagate upwards, paywalls make knowledge private. The entire system extremely fragile, bureaucratic and inefficient. By building an operating system on top of a proof language, the same ideas that improve developer productivity also apply to mathematics as a whole, leading to an unprecedented leap in scientific progress. 
 
-Wait, what?
+Finally, Moonad has many other minor aspects that set it apart from existing operating systems. For example, instead of local files, it uses decentralized storages (IPFS and Swarm). This means that, whenever you save a file locally, it is backed up, encrypted, in a network of computers. This has many consequences. For one, there isn't such a thing as "local files" anymore: once you save a file, you're able to access it from anywhere. If your hardware is damaged, nothing is lost. Backups obsolete. Sharing a file or a photo with someone becomes as easy as sending its path. This also has means that publishing a site is straightforward: all you have to do is make its directory public. Naturally, DDOSes also become a thing of the past.
 
-## Why is the world broken and how can you fix it?
+Moonad also comes with Ethereum built-in. This has many consequences. For example, instead of local users, we have Ethereum accounts. This makes website logins and passwords obsolete, since they all can use signatures from the same crypto account. Similarly, the entire credit-card payment system is replaced by direct crypto payments. You don't need to trust a site not to misuse or steal your credentials. Credit-card theft becomes a thing of the past, as does disputes. Ethereum's benefits go much beyound payments, though. Important business agreements can be formalized through automatically enforced smart-contracts. Virtual assets such as items in online games are allowed to have a much more real value, since there isn't a centralized company capable of "changing the rules of the game" or even turning it down. Finally, government censure in applications such as torrent websites become impossible.
 
-Programming is broken in many senses. We had a single, small malicious package cause an entire ecossystem to collapse. We got consumer processors with 4352 cores, yet most of our code is still single-threaded. It has been 2k years since the first mathematical proof was published, yet we still lose [millions](http://heartbleed.com) and [millions](https://medium.com/@ogucluturk/the-dao-hack-explained-unfortunate-take-off-of-smart-contracts-2bd8c8db3562) and [millions](https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident) due to bugs that could be avoided by trivial proofs. We fragmented ourselves into dozens of different ecosystems that can't share code. Our languages lag behind theory. Java took decades to introduce lambdas. JavaScript took years to figure out monads (and failed). MySQL injection is a thing. PHP exists. Buying things online require you to give your credit card number. Developers spend most of their times reinventing the wheel and debugging errors that would never happen if we used better tools. I could go on, but you get it. We are, as a species, extremely incompetent at programming. Ants would be ashamed of us.
+## Nasic: a massively parallel, low-level machine language
 
-Mathematics is also broken because, in the apex of the compute era, publications still rely on a primitive textual system. Proofs are just mentally-evaluated pseudocode. Citations are manual imports locked behind paywalls. Peer reviewing is just a huge human-laboured, error-prone type-checker. Errors in earlier works propagate upwards. The entire system extremely fragile. Findings never come with accompanying implementations. Field-specific jargon hinder cross-field communication. If I represented humanity in an intergalactic interview, I'd never mention the academia.
+### Motivation
 
-In short, I believe both of those fields are due to a serious revamp, and it is time to do that. Don't underestimate how much we would leap forward if we could suddenly make developers more efficient, processors faster, scientific practice more widespread. Done properly, this could, who knows, cure of cancer, end world hunger, reverse global warming. After all, hard problems  are often solved more by plain technological advancement than by direct investment. Fortunatelly, all the problems pointed here only exist due to social limitations, not technical ones. They are solved! So why are things the way they are?
+Operating systems often make a distinction between high and low-level languages. This enables a separation of concerns: while high-level languages focus on usability and user-friendliness, their low-level counterparts focus on speed and efficiency, often resembling the underlying computer architecture, which is usually be modelled by Turing machines. While that model has worked well for the last few decades, it hit a bottleneck as the speed of sequential CPUs stagnated. Meanwhile, the computing power of GPUs, FPGAs, ASICs and other parallel architectures keeps growing exponentially, but, sadly, modern programming languages can't make use of those advancements. Functional programming languages, whic are based on alternative model, the lambda calculus, were sold as a solution, but never fulfilled its promisses due to the inherent complexity of beta-reduction. 
 
-I want to fix the world by building an operating system I'm calling Moonad, which would improve dramatically the quality of life of our programmers and mathematicians, thus providing benefits for the entire humanity. It involves many building blocks, each one solving one particular problem with existing computer architectures, programming languages, package managers and so on. Most of those solutions weren't invented by me. Haskell's Hoogle is amazing, Coq's inductive datatypes are brilliant, Agda's proof search is dark magic, we have stream fusion, super-compilation, monads. Those tools already exist, they are clever, and they work. They just aren't used as much as they should. The only problem, it seems, is the industry lagged too much behind theory. We need someone to put all those findings together into a great product that feels inuitive and just works, like iOS. And that's how I want to fix the world.
+In 1997, a very simple graph-rewrite system with only 3 symbols and 6 rules has been shown to be a universal model of computation [1]. This system, interaction combinators, is remarkable for having the best properties of Turing machines and the lambda calculus. Like the former, it can be evaluated as a series of atomic, local operations with a clear physical implementation. Like the later, it is inherently parallel, but in a more robust manner, admitting desirable computational properties such as strong confluence, optimal sharing, zero-cost garbage-collection and so on. For those reasons, we use a slightly modified version of symmetric interaction combinators, Nasic, as our lowest-level machine language. This allows our applications to target a computing model that is ready for the upcoming future of massively parallel architectures.
 
-## Moonad's components
+### Specification
 
-I'll now list all the components of Moonad, explain how they work and what particular problem they solve.
+While conventional low-level languages describe they programs as a series of statements in an assembly-like language, Nasic programs are simply graphs of a specific format, on which every node has exactly 3 outgoing edges, and is annotated with a symbolic label (e.g., a 32-bit int).
 
-(I'm still writing this part of the manifesto and it will take a while...)
+(image)
 
-### SIC
+Any fully connected arrangement of those nodes forms a valid Nasic program. For example, those are valid Nasic programs:
 
-(Explain how register/stack machines are stupid because they are sequential and how human's intuitions about computers not necessarily correspond to the inherent nature of computation. Explain how interaction nets relates with massively parallel, optimal λ-calculus reductions. Explain what is the relationship between symmetric interaction combinators and interaction nets. Explain how one could build "general purpose ASIC", which is an obviously nonsense definition, but in the sense it'd be a general purpose computer on which properly implemented algorithms can't be improved by building ASICs since they are already physically optimal.)
+(image)
 
-### LPU
+The position of edges is important. For example, those graphs, while isomorphic, denote two different programs:
 
-(Explain our computer architectures are stupid because information must travel a huge space from main memory to the local caches to the ALUs, clocks impose an unecessary sequentialistm, etc. Explain how memory and processors could be fused into a single grid of millions of nano-mem-cpu-cores, each one operating like a small actor, responsible for holding a SIC node, communicating with nearby nodes and performing parallel graph reductions.)
+(image)
 
-### Formality
+For that reason, the ports from which edges come must be named. The port at the top of the triangle is the `main` port. The one nearest to it in counter-clockwise direction is the `aux1` port. The other one is the `aux2` port.
 
-(Explain how our programming languages are stupid because they still don't get types right, explain how formal proofs can be used to guarantee absolute correctness and replace proofs, address the "but specifications can have bugs" point, explain calmly how making such language the foundation of an operating system would make it literally immune to have viruses, malwares and all those stupid things that only exist because humans suck at programming. Explain that one doesn't need to write Agda code to use formal proofs, and we can absolutely make a Python interface for them.)
+(image)
 
-### IPFS/Swarm
+Moreover, there are 2 computation rules:
 
-(Explain how replacing local operating system by encryped decentralized operating system would make you able to access your files anywhere without paying anyone, it would allow you to "deploy" a site by merely sending your friends the path where you saved it, how it would, in short, basically merge all computers into a single universal filesystem.) 
+(image)
 
-### Ethereum
+Those rewrite rules dictate that, whenever a sub-graph matches the left side of a rule, it must be replaced by its right side. For example, the graph below:
 
-(Explain how centralized internet services are stupid because they give so much power to companies, how things like Uber, Youtube, Facebook should have DAOs of public domain, owned by nobody, providing value to the humanity as a whole...)
+(image)
 
-### Agda-inspired IDE
+Is rewritten as:
 
-(Explain all the amazing, powerful code editing features we can have once types are strong enough, including things like proof search which is basically making computers do the job of a programmer...)
+(image)
 
-### Foogle
+Because (...). Rewritteable nodes are called redexes, or active pairs. 
 
-(Explain how those could allow us to build a worldwide, type-indexed, queryable package manager and repository of algorithms, proofs and DApps. Explain how this would make the entire academia obsolete, because scientific publications would be just normal files, proofs would be just code, citations would be just imports. Explain how it would save an unmeasurable amount of money because people would finally stop reinventing the wheel in different languages because they don't know someone else already solved the same problem he/she is trying to solve. Stress how much human work is wasted reinventing the wheel, and how such a thing would change everything.)
+This completes Nasic's specification.
+
+### Explanation
+
+As unintuitive as it may seem, this simple graph-rewrite system is extremelly powerful, because it captures the two fundamental rules of computation: annihilation and commutation. The first rule covers a wide array of computational phenomena such as communication, functions, datatypes, pattern-matching and garbage-collection. The second rule covers memory allocation, copying and repetitive behaviors such as loops and recursion. We will explain how it works through a set of examples:
+
+(...)
+
+## Formality: a minimal programming and proof language
+
+### Motivation
+
+While it has been known for almost a century that mathematics and programming are, actually, the same thing - an observation known as the Curry-Howard correspondence - they're still regarded and practiced as separate subjects. This is harmful for both sides. In one side, mathematicians have the power of rigor: there is nothing more undeniably correct than a mathematical proof. Yet, ironically, those proofs are often written, checked and reviewed by humans in an extremelly error-prone process. On the other side, programmers have the power of automation: there is nothing more capable of performing a huge set of tasks without making a single mistake than a computer program. Yet, ironically, most of those programs are written in an unrigorous, bug-ridden fashion. Formality lies in the intersection between both fields: it is a programming language, on which developers are capable of implementing everyday algorithms and data structures, but it is also a proof language, on which mathematicians are capable of proposing and proving theorems. 
+
+Formality aims to be as simple as technically possible: our reference implementation takes about 500 lines of code. This doesn't make it less powerful: due to its inductive lambda encodings, Formality is capable of expressing every datatype included in a traditional proof language. This extreme expressivity also makes it very efficient, since it is capable of being compiled to all sorts of Nasic graphs. As a consequence, it isn't terminating: users must pick a specific termination checker if they worry about mathematical consistency. Different termination checkers should forbid and allow different programming styles. Users not interested by mathematical consistency can simply dispense it, though, getting to work with a very high-level, massively parallel functional programming language.
+
+### Specification
+
+Formality can be described in a single sentence: extended-scope, Church-style Calculus of Constructions with global recursive definitions and optional computational irrelevance annotations. To elaborate what this means, let's start by defining its initial syntax:
+
+```haskell
+name ::=
+  (any character in the set "a-z", "A-Z", "_", ".", "~") 
+
+term ::=
+    Type               -- type of types            
+  | [name] term        -- unannotated function
+  | [name : term] term -- annotated function
+  | {name : term] term -- function type
+  | (term term)        -- function application
+  | name               -- variable
+```
+
+(... reduction rules ...)
+
+(... typing rules ...)
+
+
+### Explanation
+
+## References
+
+[1] https://pdfs.semanticscholar.org/6cfe/09aa6e5da6ce98077b7a048cb1badd78cc76.pdf
