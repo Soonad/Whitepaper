@@ -88,7 +88,7 @@ term ::=
     Type               -- type of types            
   | [name] term        -- unannotated function
   | [name : term] term -- annotated function
-  | {name : term] term -- function type
+  | {name : term} term -- function type
   | (term term)        -- function application
   | name               -- variable
 ```
