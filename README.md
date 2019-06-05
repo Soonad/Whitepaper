@@ -157,8 +157,8 @@ Our implementation has advantages over previous interaction net graph-reduction
 systems (such as the Bologna Optimal Higher-order Machine) in that it requires
 no book-keeping, requires only 128 bits per lambda or pair, has unboxed 32-bit
 integers and constant-time beta reduction. This is possible because
-Formality-Core is a terminating language; all programs written in Formality
-are guaranteed to halt. This directly enables many of the runtime
+Formality-Core is not based on classic logic, but, instead, Elementary Affine Logic. All programs written in Formality
+are guaranteed to halt, and enjoy key computational characteristics that differ from classic functional languages. This directly enables many of the runtime
 features and optimizations (such as no book-keeping) described above, although
 without loss of generality as Formality-Core can model Turing-Complete programs
 via corecursion. In other words, Turing-Complete computation can be performed by
@@ -197,7 +197,7 @@ To describe the Formality-Core nodes from the above diagram in more detail:
   second label describes the first integer argument.
 - **OP2**: A curried binary arithmetic operation node, whose label describes and
   arithmetic operation and reacts with a **NUM** node to produce an **OP1**
-- **ITE**: An iteration node, which reacts with a **NUM** node in one way if the
+- **ITE**: A numeric branching node, which reacts with a **NUM** node in one way if the
   node's numeric value is 1 or another way if the node's value is anything else.
 
 Any fully connected arrangement of those nodes forms a valid Formality core program.
