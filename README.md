@@ -48,7 +48,7 @@ Faulty software and malwares are widespread on the industry, sometimes causing
 
 Imagine a world without bugs and malware? As far-fetched as it might seems,
 existing technologies such as formal proofs are perfectly capable of eliminating
-bugs by ensuring that a program's behavior matches its specification [^1].
+bugs by ensuring that a program's behavior matches its specification[^1].
 Here, we will explain how Moonad, an operating system built on top of a proof
 language can address these problems.
 
@@ -211,7 +211,7 @@ a rule, it must be replaced by its right side. Here is an illustration of how
 this works in practice:
 
 
-![Formality-Core Simulation](/images/inet-simulation.png "Simulation in Formality-Core Net")
+![Formality-Core Simulation](/images/inet-simulation.gif "Simulation in Formality-Core Net")
 
 Of course, we cannot easily write software directly in the Formality-Core
 interaction net graph, so we have a textual representation which compiles to it.
@@ -308,8 +308,8 @@ proposing and proving theorems.
 [event-stream]: https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident
 [DAO]: https://medium.com/@ogucluturk/the-dao-hack-explained-unfortunate-take-off-of-smart-contracts-2bd8c8db3562
 [meltdown-spectre]: https://www.intelligonetworks.com/blog/meltdown/spectre-will-cost-the-world-30-system-performancep
-[737-max]: https://www.ndtv.com/world-news/boeing-737-max-crash-was-software-to-blame-and-what-comes-next-2007893),
-[ohio-hospital]:https://www.forbes.com/sites/leemathews/2018/11/28/ransomware-attack-disrupts-emergency-services-at-ohio-hospital/
+[737-max]: https://www.ndtv.com/world-news/boeing-737-max-crash-was-software-to-blame-and-what-comes-next-2007893
+[ohio-hospital]:https://www.forbes.com/sites/leemathews/2018/11/28/ransomware-attack-disrupts-emergency-services-at-ohio-hospital
 [mergesort]: https://www.google.com/search?ei=zmOOXNKxDY_E5OUPiLq5mAs&q=%22def+mergesort%22+filetype%3Apy&oq=%22def+mergesort%22+filetype%3Apy&gs_l=psy-ab.3..0i71l8.7645.7645..7650...0.0..0.0.0.......0....2j1..gws-wiz.6UEn0LSx0FI,
 
 [^1]: Some readers might object here that while formal proofs can ensure that a
