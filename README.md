@@ -307,7 +307,7 @@ proposing and proving theorems.
 [left-pad]: https://www.npmjs.com/package/left-pad
 [event-stream]: https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident
 [DAO]: https://medium.com/@ogucluturk/the-dao-hack-explained-unfortunate-take-off-of-smart-contracts-2bd8c8db3562
-[meltdown-spectre]: https://www.intelligonetworks.com/blog/meltdown/spectre-will-cost-the-world-30-system-performancep
+[meltdown-spectre]: https://www.intelligonetworks.com/blog/meltdown/spectre-will-cost-the-world-30-system-performance
 [737-max]: https://www.ndtv.com/world-news/boeing-737-max-crash-was-software-to-blame-and-what-comes-next-2007893
 [ohio-hospital]:https://www.forbes.com/sites/leemathews/2018/11/28/ransomware-attack-disrupts-emergency-services-at-ohio-hospital
 [mergesort]: https://www.google.com/search?ei=zmOOXNKxDY_E5OUPiLq5mAs&q=%22def+mergesort%22+filetype%3Apy&oq=%22def+mergesort%22+filetype%3Apy&gs_l=psy-ab.3..0i71l8.7645.7645..7650...0.0..0.0.0.......0....2j1..gws-wiz.6UEn0LSx0FI,
