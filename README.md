@@ -69,7 +69,7 @@ almost optimal up to the laws of physics, in a sense that will be made precise
 later on, as well as detail how future programming languages can be designed to
 make the best use of those capacities.
 
-From a **productivity** perspective, we are extremelly inefficient. When it
+From a **productivity** perspective, we are extremely inefficient. When it
 comes to features, our programming languages lag behind theory. Java took
 decades to implement lambdas. JavaScript took years to figure out monads (and
 failed). Modern languages such as Go struggle with aspects as simple as
@@ -140,8 +140,8 @@ languages, which are based on alternative model, the lambda calculus have been
 sold as a solution, but never fulfilled its promises, partly due to the inherent
 complexity of beta-reduction.
 
-In 1997, a very simple graph-rewrite system with only 3 symbols and 6 rules has
-been shown to be a universal model of computation [^2]. This system,
+In 1997, a very simple graph-rewrite system with only 3 symbols and 6 rules was
+shown to be a universal model of computation [^2]. This system,
 interaction combinators, is remarkable for having the best properties of Turing
 machines and the lambda calculus. Like the former, it can be evaluated as a
 series of atomic, local operations with a clear physical implementation. Like
