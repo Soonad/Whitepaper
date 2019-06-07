@@ -43,14 +43,14 @@ has been 2k years since the first mathematical proof was published, yet we still
 lose absurd amounts of money for bugs like the
 [heartbleed](http://heartbleed.com) and [TheDAO][DAO]. One example may have
 [degraded Planet Earth's total installed CPU capacity by 30%][meltdown-spectre].
-Faulty software and malwares are widespread on the industry, sometimes causing
+Faulty software and malwares are widespread in the industry, sometimes causing
 [airplanes to crash][737-max], and hospitals to [stop operating][ohio-hospital].
 
-Imagine a world without bugs and malware? As far-fetched as it might seems,
+Imagine a world without bugs and malware? As far-fetched as it might seem,
 existing technologies such as formal proofs are perfectly capable of eliminating
 bugs by ensuring that a program's behavior matches its specification[^1].
 Here, we will explain how Moonad, an operating system built on top of a proof
-language can address these problems.
+language, can address these problems.
 
 From a **performance** perspective, our most widely used programming languages
 have several, unavoidable inefficiencies that, by design, make them many times
@@ -69,7 +69,7 @@ almost optimal up to the laws of physics, in a sense that will be made precise
 later on, as well as detail how future programming languages can be designed to
 make the best use of those capacities.
 
-From a **productivity** perspective, we are extremelly inefficient. When it
+From a **productivity** perspective, we are extremely inefficient. When it
 comes to features, our programming languages lag behind theory. Java took
 decades to implement lambdas. JavaScript took years to figure out monads (and
 failed). Modern languages such as Go struggle with aspects as simple as
@@ -140,8 +140,8 @@ languages, which are based on alternative model, the lambda calculus have been
 sold as a solution, but never fulfilled its promises, partly due to the inherent
 complexity of beta-reduction.
 
-In 1997, a very simple graph-rewrite system with only 3 symbols and 6 rules has
-been shown to be a universal model of computation [^2]. This system,
+In 1997, a very simple graph-rewrite system with only 3 symbols and 6 rules was
+shown to be a universal model of computation [^2]. This system,
 interaction combinators, is remarkable for having the best properties of Turing
 machines and the lambda calculus. Like the former, it can be evaluated as a
 series of atomic, local operations with a clear physical implementation. Like
