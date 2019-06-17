@@ -170,7 +170,7 @@ physical systems can only be finite state machines.
 
 ### Specification
 
-While conventional low-level languages describe they programs as a series of
+While conventional low-level languages describe their programs as a series of
 statements in an assembly-like language, Formality-Core programs are simply graphs of a
 specific format, with the following six node types:
 
