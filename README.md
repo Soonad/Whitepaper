@@ -1,6 +1,6 @@
 # Moonad: a Peer-to-Peer Operating System
 
-Victor Maia, John Burnham, Maisa Milena
+Victor Maia, John Burnham
 
 **Abstract.** We present the design of a minimal, decentralized operating
 system called Moonad which aims to solve many problems with existing
@@ -174,7 +174,7 @@ While conventional low-level languages describe they programs as a series of
 statements in an assembly-like language, Formality-Core programs are simply graphs of a
 specific format, with the following six node types:
 
-![Formality-Core Nodes](/images/fm-net-node-types.png "Nodes in the Formality-Core Net")
+![Formality-Core Nodes](https://gitlab.com/moonad/formality/raw/master/docs/images/fm-net-node-types.png "Nodes in the Formality-Core Net")
 
 Each node has 1 to 3 outgoing edges, called "ports", depending on the node type.
 The upward-pointing port in the above diagram is called the `main` port, and, if
@@ -204,14 +204,14 @@ Any fully connected arrangement of those nodes forms a valid Formality core prog
 
 There are 21 graph rewrite rules in Formality-Core:
 
-![Formality-Core Rewrite Rules](/images/fm-net-rewrite-rules.png "Reduction Rules in the Formality-Core Net")
+![Formality-Core Rewrite Rules](https://gitlab.com/moonad/formality/raw/master/docs/images/fm-net-rewrite-rules.png "Reduction Rules in the Formality-Core Net")
 
 Those rewrite rules dictate that, whenever a sub-graph matches the left side of
 a rule, it must be replaced by its right side. Here is an illustration of how
 this works in practice:
 
 
-![Formality-Core Simulation](/images/inet-simulation.gif "Simulation in Formality-Core Net")
+![Formality-Core Simulation](https://gitlab.com/moonad/formality/raw/master/docs/images/inet-simulation.gif "Simulation in Formality-Core Net")
 
 Of course, we cannot easily write software directly in the Formality-Core
 interaction net graph, so we have a textual representation which compiles to it.
@@ -249,7 +249,7 @@ def dir_to_vec: {a}
 
 And these are the compilation rules:
 
-![Formality-Core Compilation](/images/fm-net-compilation.png "Compiling Formality-Core to a Formality-Core Net")
+![Formality-Core Compilation](https://gitlab.com/moonad/formality/raw/master/docs/images/fm-net-compilation.png "Compiling Formality-Core to a Formality-Core Net")
 
 As unintuitive as it may seem, this simple graph-rewrite system is extremely
 powerful, because it captures the two fundamental rules of computation:
