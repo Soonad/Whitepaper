@@ -1,3 +1,5 @@
+(Note: this is an outdated draft of personal notes. Please check https://github.com/moonad/formality for our latest works.)
+
 # Moonad: a Peer-to-Peer Operating System
 
 Victor Maia, John Burnham
