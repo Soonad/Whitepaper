@@ -269,14 +269,7 @@ The default, "home-page", feature-rich DApp that serves for multiple purposes.
 [ohio-hospital]:https://www.forbes.com/sites/leemathews/2018/11/28/ransomware-attack-disrupts-emergency-services-at-ohio-hospital
 [mergesort]: https://www.google.com/search?ei=zmOOXNKxDY_E5OUPiLq5mAs&q=%22def+mergesort%22+filetype%3Apy&oq=%22def+mergesort%22+filetype%3Apy&gs_l=psy-ab.3..0i71l8.7645.7645..7650...0.0..0.0.0.......0....2j1..gws-wiz.6UEn0LSx0FI,
 
-[^1]: Some readers might object here that while formal proofs can ensure that a
-  program's implementation matches its specification, it cannot eliminate errors
-  inherent to the specification. This is true, unless there is a
-  formalizable meta-specification of the specification, in which case we
-  can construct a proof showing consistency between the two. Otherwise, the
-  specification of the specification is the mind of the programmer or user
-  themselves, and in this domain there may be many bugs which are not amenable
-  to elimination via formal methods.
+[^1]: Some readers might object here that while formal proofs can ensure that a program's implementation matches its specification, it cannot eliminate errors inherent to the specification. This is true, unless there is a formalizable meta-specification of the specification, in which case we can construct a proof showing consistency between the two. Otherwise, the specification of the specification is the mind of the programmer or user themselves, and in this domain there may be many bugs which are not amenable to elimination via formal methods.  
 
 [^2]: Yves Lafont, *Interation Combinators*, Institut de Mathematiques de Luminy, 1997 (https://pdfs.semanticscholar.org/6cfe/09aa6e5da6ce98077b7a048cb1badd78cc76.pdf)
 
