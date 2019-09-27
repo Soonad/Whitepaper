@@ -9,11 +9,11 @@ We present **Moonad**, a peer-to-peer operating system. Its machine language,
 system based on interaction nets. Moonad's purely functional user-facing
 language, **Formality** features a powerful, elegant type-system capable of
 stating and proving theorems about its own programs through inductive
-λ-encodings. Online interactions are made through **Trellis**, a global append-only
-event-log an decentralized application platform. On top of those, we build a
-front-end interface, **Moonad**, where users can create, deploy and use
-decentralized applications (Forall), pose and solve mathematical problems
-(Provit), and exchange scarce virtual assets (Phos).
+λ-encodings. Online interactions are made through **Trellis**, a global
+append-only event-log compatible with both trusted and decentralizd backends.
+On top of those, we build a front-end interface, **Moonad**, where users can
+create, deploy and use decentralized applications (Forall), pose and solve
+mathematical problems (Provit), and exchange scarce virtual assets (Phos).
 
 ## Table of Contents
 
@@ -124,6 +124,31 @@ could write an algorithm such as:
 function get_at(i, arr) {
   ... code here ...
 }
+```
+
+But this has no guarantees. You could call it with nonsensical arguments such
+as `get_at("foo", 42)`, and the compiler would do nothing to stop you, leading
+to (possibly catastrophical) runtime errors. Traditional typed languages
+improve the situation, allowing you to "enrich" that definition with simple or
+even polymorphic types, such as:
+
+```javascript
+function get_at<A>(i : Num, arr : Array<A>) : A {
+  ... code here ...
+}
+```
+
+This has some important guarantees. For example, it is impossible to call
+`get_at` with a String index, preventing a wide class of runtime errors. But
+this guarantee is incomplete. You can still, for example, call `get_at` with an
+index out of bounds. In fact, a similar error caused the catastrophic
+[heartbleed](http://heartbleed.com) vulnerability. Formality types are
+arbitrarily expressive, allowing you to capture all demands you'd expect from
+`get_at`:
+
+```javascript
+get_at*L : {A: Type, i: Fin(L), arr: Vector(A, L)} -> [x: A ~ At(A,L,i,arr,x)]
+  ... code here ...
 ```
 
 Here, we use a bound, `L`, to enforce that the index is not larger than the
