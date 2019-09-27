@@ -60,14 +60,14 @@ adoption.
 There has been tremendous theoretical progress in programming language and
 compiler design, that is barely exploited. We have substructural type systems
 that can eliminate resource management errors (like segmentation faults) and
-ensuring memory safety.  We have proof languages capable of unifying the field
-of mathematics and programming as one with the magic of the Curry-Howard
-correspondence. In principle, we could have systems software that is formally
-proven to be error-free, and proof assistants that are both user-friendly enough
-to be taught in grade-school math class and performant enough to be used on any
+ensure memory safety.  We have proof languages capable of unifying the field of
+mathematics and programming as one (the Curry-Howard correspondence). In
+principle, we could have systems software that is formally proven to be
+error-free, and proof assistants that are both user-friendly enough to be
+taught in grade-school math class and performant enough to be used on any
 platform.
 
-Contrast this theoretical progress with our practical record: Not long ago, we
+Contrast this theoretical progress with our practical record: not long ago, we
 had a single, small malicious package cause the entire web ecosystem [to
 collapse][left-pad], [twice][event-stream]. More than [300,000
 sites](https://wpvulndb.com/statistics) online today are vulnerable to SQL
@@ -138,13 +138,12 @@ function get_at<A>(i : Num, arr : Array<A>) : A {
 }
 ```
 
-This has some important guarantees. For example, it is impossible to call
-`get_at` with a String index, preventing a wide class of runtime errors. But
-this guarantee is incomplete. You can still, for example, call `get_at` with an
-index out of bounds. In fact, a similar error caused the catastrophic
-[heartbleed](http://heartbleed.com) vulnerability. Formality types are
-arbitrarily expressive, allowing you to capture all demands you'd expect from
-`get_at`:
+This has some guarantees. For example, it is impossible to call `get_at` with a
+String index, preventing a wide class of runtime errors. But you can still, for
+example, call `get_at` with an index out of bounds. In fact, a similar error
+caused the catastrophic [heartbleed](http://heartbleed.com) vulnerability.
+Formality types are arbitrarily expressive, allowing you to capture all demands
+you'd expect from `get_at`:
 
 ```javascript
 get_at*L : {A: Type, i: Fin(L), arr: Vector(A, L)} -> [x: A ~ At(A,L,i,arr,x)]
@@ -173,11 +172,26 @@ security one can afford.
 
 Some readers might object here that while formal proofs can ensure that a
 program's implementation matches its specification, it cannot eliminate errors
-inherent to the specification. This is true, unless there is a formalizable
-meta-specification of the specification, in which case we can construct a proof
-showing consistency between the two. Otherwise, the specification of the
-specification is the mind of the programmer or user themselves, and in this
-domain there may be many bugs which are not amenable to formal methods.
+inherent to the specification. This is true, but, in many cases, specifications
+are much smaller than implementations. For example, 
+
+```javascript
+spec : Type
+  [
+    // Demands a List function such that
+    sort : List(Word) -> List(Word),
+
+    // It returns the same list in ascendinig order
+    And(is_same(xs, sort(ys)), is_ascending(sort(ys)))
+  ]
+```
+
+The `spec` above demands a `List` function such that it returns the same list
+in ascending order. Writing and auditing this specification is considerably
+easier than implementing a complete `sort` function. As such, formal
+verification can be seen as an optimization of human auditing: instead of
+verifying a vast amount of code, you audit a small specification and let the
+compiler do the rest.
 
 ---
 
@@ -220,14 +234,18 @@ formalization without too much effort:
 ```javascript
 T Functor {F : Type -> Type}
 | functor 
+
   // A mapping function
   { map : {~A : Type , ~B : Type , f : A -> B, x : F(A)} -> F(B)
+
   // Satisfying the identity law
   , identity : {~A : Type , fa : F(A)} -> map(~A, ~A, id(~A),fa) == fa
+
   // Satisfying the composition law
   , composition :
       { ~A : Type, ~B : Type, ~C : Type, g : B -> C, f : A -> B, fa : F(A)
       } -> map(~A, ~C, {x} g(f(x)), fa) == map(~B, ~C, g, map(~A, ~B, f, fa))
+
   }
 ```
 
@@ -325,12 +343,14 @@ garbage-collection.
 
 We use a slightly modified version of interaction combinators, called FM-Net as
 our lowest-level machine language, extending interaction combinators with
-additional graph node types for efficient numeric operations. Our implementation
-has advantages over previous interaction net graph-reduction systems (such as
-the Bologna Optimal Higher-order Machine) in that it requires no book-keeping,
-requires only 128 bits per lambda or pair, has unboxed 32-bit integers and
-constant-time beta reduction. This is possible due to Formality's guaranteed
-termination
+additional graph node types for efficient numeric operations. Our
+implementation has advantages over previous interaction net graph-reduction
+systems (such as the Bologna Optimal Higher-order Machine) in that it requires
+no book-keeping, requires only 128 bits per lambda or pair, has unboxed 32-bit
+integers and constant-time beta reduction. This is possible due to Formality's
+stratification, a structural discipline on how terms are duplicated, inherited
+from its underlying logic, Elementary Affine.
+
 
 ### Node Types
 
@@ -445,7 +465,7 @@ pairs/projections). Note that this process is capable of duplicating λ-bound
 variables, but this isn't safe in practice, and won't happen in well-typed
 inputs.
 
-## Implementation
+### Implementation
 
 In our implementation, we use a buffer of 32-bit unsigned integers to represent
 nodes, as follows:
@@ -543,8 +563,8 @@ the thread will make `C` point to `B`. The same is done for each neighbor port
 The lazy evaluation algorithm is very different from the strict one. It works by
 traversing the graph, exploring it to find redexes that are "visible" on the
 normal form of the term, skipping unnecessary branches. It is interesting
-because it allows avoiding wasting work; for example, `({a b}b (F 42) 7)` would
-quickly evaluate to `7`, no matter how long `(F 42)` takes to compute. In
+because it allows avoiding wasting work; for example, `({a b}b)(f(42), 7)` would
+quickly evaluate to `7`, no matter how long `f(42)` takes to compute. In
 exchange, it is "less parallel" than the strict algorithm (we can't reduce all
 redexes since we don't know if they're necessary), and it requires global
 garbage collection (since erasure nodes are ignored).
@@ -603,25 +623,59 @@ Trellis is an append-only event-log divided into distinct labeled streams.
 
 **TODO**
 
+## Forall: a global repository of knowledge
+
+TODO: types are theorems, programs are proofs, files are papers, imports are
+citations. Forall is a both a package manager and a substitute for academic
+publishing, where code can be used in mathematical publications, and proofs can
+be used in code.
+
+## Phos: a smart-contract platform
+
+Phos is a Formality state-transition function, `phos : Event -> PhosState ->
+PhosState`, that interprets Trellis event stream as a cryptographic ledger and
+smart-contract platform.
+
 ## Moonad
 
-- Sending and receiving Phos Coins (PhosWallet)
+Moonad is an user-facing application that combines all the systems above in an
+unified package that just works. We call is an operatinig system in the sense
+it is capable of scheduling and running applications, but it isn't one in the
+traditional sense; as in, you won't be able to boot from it. It can be seen as
+a sandboxed application platform.
 
-  Phos is a state-transition function, `phos : Event -> PhosWorld -> PhosWorld`,
-  that interprets a Unilog events stream as a cryptographic ledger and smart
-  contract platform.
+Moonad uses FM-Net as its low-level machine language, Formality as its
+user-facing language, Forall as its package-manager and Trellis as an
+abstraction of the internet and online interactions and Phos as a
+smart-contract platform. By combining those with a standard type for
+applications, `App`, Moonad is capable of renderizing interactive online
+applications that users send to Forall. Like many operating systems, it comes
+with a set of built-in, essential applications, including:
 
-- Finding and publishing cool applications
+## PhosWallet
 
-- Browsing the event-log (i.e., TrellisExplorer)
+Sending and receiving Phos Coins.
 
-- Placing code/proof bounties on types (Provit)
+## AppStore
 
-- uploading and downloading files to Forall, Formality's global immutable
-  filesystem and package namespace
-  - save_file(name, code): saves a file on the server, returns an unique name.
-  - load_file(unique_name): loads a file from the server.
-  - load_citations(unique_name): loads the list of files that import this one.
+Finding and publishing cool applications.
+
+## TrellisExplorer
+
+Browsing the global event-log.
+
+# Provit
+
+Placing code/proof bounties on types.
+
+# Forall
+
+Uploading and downloading files to the package manager.
+
+# Formality-IDE
+
+Editor, evaluator, debugger and type-checker for Formality, including
+interaction net visualization.
 
 **TODO**
 
