@@ -96,22 +96,18 @@ they may well ask, why climb the highest mountain? Why, 35 years ago, fly the
 Atlantic? Why does Rice play Texas?}{---John F. Kennedy, \textit{Address at
 Rice University on the Nation's Space Effort}}
 
-\begin{abstract}
-We present \textbf{Moonad}, a peer-to-peer operating system. Its machine
-language, \textbf{FM-Net}, consists of a massively parallel, beta-optimal
-graph-reduction system based on interaction nets. Its purely functional
-user-facing language, \textbf{Formality} features a powerful, elegant
+\begin{abstract} We present \textbf{Moonad}, a sandboxed, peer-to-peer
+operating system. Its machine language, \textbf{FM-Net}, consists of a
+massively parallel, beta-optimal graph-reduction system based on interaction
+nets. Its user-facing language, \textbf{Formality} features a powerful, elegant
 type-system capable of stating and proving theorems about its own programs
-through inductive $\lambda$-encodings.  Online interactions are made through
-\textbf{Bitlog}, a
-token-less data-only blockchain, compatible with both private and decentralized
-backends and featuring extensible smart contract universes. We
-present two examples of such universes: \textbf{Ethos}, a universe with native
-eWASM execution, and \textbf{Phos}, a universe with native FM-Net execution.
-
-On top of those, we describe a front-end interface, Moonad, where users
-can create, deploy and use decentralized applications in an immutable namespace,
-transact in a trustless code and proof marketplace, and exchange digital assets.
+through inductive $\lambda$-encodings. Online interactions are made through
+\textbf{Bitlog}, a token-less data-only blockchain that serves as a global
+stream of events. A smart-contract platform, \textbf{Phos}, is designed as a
+pure fold over the stream. Those building blocks are assembled together forming
+our front-end, Moonad, where users can create, deploy and use decentralized
+applications in an immutable namespace, transact in a trustless code and proof
+marketplace, and exchange digital assets.
 \end{abstract}
 
 \newpage
@@ -172,7 +168,7 @@ technology exists, we need to build the user experience. Moonad aims to assemble
 many of these amazing technologies into a decentralized operating system that
 "just works"; to build computing systems that are fast, friendly and safe.
 
-\section{Formality: An efficient programming proof language}
+\section{Formality: An efficient programming and proof language}
 
 \subsection{Why a proof language?}
 
@@ -195,7 +191,7 @@ type systems.
 
 As programmers and as mathematicians, we don't want to compromise. On one side,
 mathematicians have the power of rigor: there is nothing more undeniably correct
-than a mathematical proof. Yet ironically, those proofs are often written,
+than a mathematical proof. Yet, ironically, those proofs are often written,
 checked and reviewed by humans in an extremelly error-prone process. On the
 other side, programmers have the power of automation: there is nothing more
 capable of performing a huge set of tasks without making a single mistake than a
@@ -308,11 +304,12 @@ of the lambda-calculus with great computational characteristics. In particular,
 EALC is compatible with the most efficient version of the optimal reduction
 algorithm [citation]. This is important because, while asymptically optimal,
 most implementations of the algorithm carry an extra, significant constant
-overhead caused by a book-keeping machinery. This made them too slow in
-practice, decreasing interest on the area. By relying on EALC, we can avoid the
-book-keeping overhead, making it much faster than all alternatives. Below is a
-table comparing the amount of native operations (graph rewrites) required to
-reduce $\lambda$-terms in other implementations and Formality:
+overhead caused by a book-keeping machinery. This makes them too slow in
+practice, which is the main reason the technique hasn't seen use in practice so
+far. By relying on EALC, though, we can avoid the book-keeping overhead, making
+Formality much faster than all alternatives. Below is a table comparing the
+amount of native operations (graph rewrites) required to reduce $\lambda$-terms
+in different implementations:
 
  \begin{tabular}{ c | c | c | c | c | c}
 Term & GeomOpt & GeomImpl & YALE & IntComb & Formality \\\hline
@@ -325,7 +322,12 @@ Term & GeomOpt & GeomImpl & YALE & IntComb & Formality \\\hline
  44II &    3456 &     2816 &  148 &    2447 &        89\\
 \end{tabular}
 
-TODO: citations
+TODO: citations 
+
+NOTE: you can find that table on "Compiling the lambda-calculus into
+Interaction Combinators (1998)" by Ian Mackie and Jorge Sousa Pinto
+Formality numbers can be obtained following instructions here:
+https://gist.github.com/MaiaVictor/473f673c785d3eb8b18224124d577661
 
 Not only Formality requires orders of magnitude less native operations, but its
 native operations are much simpler.
@@ -341,20 +343,22 @@ lambda encodings, an alternative to a datatype system that use plain lambdas to
 encode arbitrary data. While attractive, this approach wasn't adopted in
 practical type theories for several reasons:
 
+NOTE: citations can be found on the original paper on Self Types by Aaron Stump
+
 
 \begin{enumerate}
 \item There is no encoding that provides both recursion and fast pattern-matching.
 \begin{enumerate}
-\item Church encodings provide recursion, but pattern-matching is slow $O(n)$.
-\item Scott encodings provide fast pattern-matching, but no recursion.
-\item Alternative encodings that provide both consume too much memory.
+\item Church provide recursion, but slow pattern-matching slow ($O(n)$).
+\item Scott provide fast pattern-matching, but no recursion.
+\item Alternatives that provide both consume too much memory.
 \end{enumerate}
 \item We cannot prove \verb|0 != 1| with the usual definition of \verb|!=|.
 \item Induction is not derivable.
 \end{enumerate}
 
-Formality solves the first issue by simply using Church encodings for recursion
-and Scott encodings for data, the second issue by collapsing universes, and the
+Formality solves the first issue by using Church encodings for recursion and
+Scott encodings for data, the second issue by collapsing universes, and the
 last issue by combining self-types and type-level recursion [citation]. It is
 well-known that, in most proof languages, collapsing universes and type-level
 recursion can lead to logical paradoxes, but the remarkable coincidence is that
@@ -397,7 +401,7 @@ contents of a box.
 \subsubsection{EALC reduction}
 
 Substitution of a variable in an EALC term is defined:
-\begin{definition} EAlC substitution
+\begin{definition} EALC substitution
   \begin{enumerate}
     \item \verb|x[y <- M]| is
       \begin{enumerate}
@@ -411,6 +415,9 @@ Substitution of a variable in an EALC term is defined:
           \verb|(dup x = M[x <- P]; N[y <- P])|
   \end{enumerate}
 \end{definition}
+
+NOTE: this is wrong (name-capturing). Just define `t[x <- u]` as name-capturing
+substitution of `x` by `u` in `t`, no need to provide an algorithm.
 
 The EALC has the following reduction rules:
 
@@ -433,6 +440,8 @@ Let $[N/x]M$ indicate the substitution of $x$ by $N$ in $M$.
 \item dupdup-swap: $\UV{r7} \rab \UV{r8}$
 \end{enumerate}
 \end{definition}
+
+NOTE: this is ugly, consider defining it in the same syntax type inference is defined
 
 The first rule is the usual beta-reduction. The second rule allows us to copy
 the contents of a box. The last two are just permutations, allowing inner $dup$s
@@ -494,6 +503,13 @@ FM-TT's syntax is defined as follows:
 
 For simplicity, we extend our notation with the following syntax sugars:
 
+NOTE: I don't think you should do that here, those aren't really FM-TT syntax
+sugars, just conveniences used on this particular paper. Including it like that
+may be confusing since the set of syntax sugars is FM-Lang, which is different
+and bigger than this. FM-TT itself shouldn't have syntax sugars, and this is
+important because, for example, we will probably have a standard "raw FM-TT"
+syntax/format which will *not* have those sugars
+
 \begin{definition} FM-TT syntax sugars
 \begin{itemize}
 \item \verb|(x0 : A0, x1 : A1, ...) => t| for \\
@@ -526,6 +542,8 @@ Substitution of a variable in an FM-TT term is defined:
     \item \verb|(%M)[x <- N]| is \verb|%(M[x <- N])|
   \end{enumerate}
 \end{definition}
+
+NOTE: again, I'd not include this algorithm here, just describe it in English
 
 \subsubsection{Typing Rules}
 
@@ -620,7 +638,7 @@ FM-TT's typing rules are:
 
 \end{definition}
 
-\subsubsection{Induction}
+\subsubsection{Examples}
 
 Those primitives allow FM-TT to be a simple type-theory featuring inductive
 datatypes.
