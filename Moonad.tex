@@ -103,9 +103,8 @@ graph-reduction system based on interaction nets. Its purely functional
 user-facing language, \textbf{Formality} features a powerful, elegant
 type-system capable of stating and proving theorems about its own programs
 through inductive $\lambda$-encodings.  Online interactions are made through
-\textbf{Bitlog}, a
-token-less data-only blockchain, compatible with both private and decentralized
-backends and featuring extensible smart contract universes. We
+\textbf{Bitlog}, a token-less data-only blockchain, compatible with both private
+and decentralized backends and featuring extensible smart contract universes. We
 present two examples of such universes: \textbf{Ethos}, a universe with native
 eWASM execution, and \textbf{Phos}, a universe with native FM-Net execution.
 
@@ -314,6 +313,7 @@ book-keeping overhead, making it much faster than all alternatives. Below is a
 table comparing the amount of native operations (graph rewrites) required to
 reduce $\lambda$-terms in other implementations and Formality:
 
+\hfill \newline
  \begin{tabular}{ c | c | c | c | c | c}
 Term & GeomOpt & GeomImpl & YALE & IntComb & Formality \\\hline
  22II &     204 &       56 &   38 &      66 &        21\\
@@ -324,6 +324,7 @@ Term & GeomOpt & GeomImpl & YALE & IntComb & Formality \\\hline
 223II &    1750 &     1046 &  213 &     869 &        69\\
  44II &    3456 &     2816 &  148 &    2447 &        89\\
 \end{tabular}
+\\ \hfill \newline
 
 TODO: citations
 
@@ -889,6 +890,7 @@ main : Word
 
 They include many built-in operations:
 
+\hfill \newline
 \begin{tabular}{ c | c | c}
 name & syntax & javascrip equivalent \\\hline
 addition & \verb|x + y| & \verb|(x + y) >>> 0|\\
@@ -915,9 +917,8 @@ float-exponentiation & \verb|x ^f y| & \verb|x ** y|\\
 uint-to-float & \verb|.f(y)| & -\\
 float-to-uint & \verb|.u(y)| & -\\
 \end{tabular}
-\\
-\hfill
-\newline
+\\ \hfill \newline
+
 There is no operator precedence: parenthesis are always placed on the right.
 That means 3 * 10 + 1 is parsed as 3 * (10 + 1). If you want the multiplication
 to occur first, you must be explicit:
@@ -931,7 +932,7 @@ main : Word
 
 \verb|if| allows branching with a \verb|Word| condition.
 
- \hfill \newline
+\hfill \newline
 \begin{tabular}{ c | c }
 syntax & description \\\hline
 \verb|if n: a else: b| & If \verb|n .= 0|, evaluates to \verb|b|, else, evaluates to \verb|a|
@@ -954,6 +955,7 @@ main : Output
 
 Native pairs store two elements of possibly different types.
 
+\hfill \newline
 \begin{tabular}{ c | c }
 syntax & description \\\hline
 \verb|[x : A, B(x)]| & The type of a pair\\
@@ -962,9 +964,7 @@ syntax & description \\\hline
 \verb|snd(p) | & Extracts the second element of a pair\\
 \verb|get [a, b] = p ... | &Extracts both elements of a pair\\
 \end{tabular}
-\\
-\hfill
-\newline
+\\ \hfill \newline
 
 Note that the type of a pair is \verb|[x : A, B(x)]|, because the type of the
 second element can depend on the value of the first. When it doesn't, you can
