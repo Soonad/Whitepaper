@@ -1,0 +1,193 @@
+%%
+%% This is file `trfrac.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% trfrac.dtx  (with options: `file')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2009 by Kevin W. Hamlen
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.3a of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.3a or later is part of all distributions of LaTeX version
+%% 2004/10/01 or later.
+%% 
+\newdimen\trtopgap\trtopgap\z@
+\newdimen\trbotgap\trbotgap\z@
+\newcommand\TRF@startp{31415926}
+\newcommand\TRF@endp{27182818}
+\newif\ifTRF@first
+\newif\ifTRF@outer\TRF@outertrue
+\newif\ifTRF@derivok\TRF@derivoktrue
+\newdimen\TRF@lhang\TRF@lhang\z@
+\newdimen\TRF@rhang\TRF@rhang\z@
+\newdimen\TRF@lsave
+\newdimen\TRF@ni
+\newdimen\TRF@bi
+\newdimen\TRF@bw
+\newbox\TRF@numbox
+\newbox\TRF@denombox
+\newbox\TRF@eqbox
+\newcommand\TRF@trfrac[3]{%
+  \begingroup%
+    \ifnum\lastpenalty=\TRF@startp\relax%
+      \TRF@firsttrue%
+    \else%
+      \TRF@firstfalse%
+    \fi%
+    \TRF@lsave\TRF@lhang%
+    \setbox\TRF@eqbox\hbox{\TRF@derivokfalse#1}%
+    \ifdim\wd\TRF@eqbox>\z@%
+      \setbox\TRF@eqbox\hbox{\kern\p@\unhbox\TRF@eqbox}%
+    \fi%
+    \TRF@lhang\z@%
+    \setbox\TRF@numbox\hbox{%
+      \TRF@outerfalse%
+      \m@th$\strut%
+      \penalty\TRF@startp\relax%
+      #2%
+      \ifnum\lastpenalty=\TRF@endp\relax\else%
+        \global\TRF@rhang\z@%
+      \fi%
+      $%
+    }%
+    \setbox\TRF@denombox\hbox{%
+      \TRF@derivokfalse%
+      \m@th$\strut#3$%
+    }%
+    \dimen@\wd\TRF@numbox%
+    \advance\dimen@-\TRF@rhang%
+    \TRF@bw\dimen@%
+    \advance\TRF@bw-\TRF@lhang%
+    \ifdim\wd\TRF@denombox>\TRF@bw\TRF@bw\wd\TRF@denombox\fi%
+    \advance\dimen@\TRF@lhang%
+    \advance\dimen@-\wd\TRF@denombox%
+    \TRF@ni\ifdim\dimen@>\z@\z@\else-.5\dimen@\fi%
+    \TRF@bi\TRF@ni%
+    \advance\TRF@bi\TRF@lhang%
+    \TRF@lhang\ifdim\dimen@<\z@\z@\else.5\dimen@\fi%
+    \ifdim\TRF@bi>\TRF@lhang\TRF@bi\TRF@lhang\fi%
+    \TRF@rhang\TRF@ni%
+    \advance\TRF@rhang\wd\TRF@numbox%
+    \dimen@\TRF@bi%
+    \advance\dimen@\TRF@bw%
+    \advance\dimen@\wd\TRF@eqbox%
+    \ifdim\dimen@>\TRF@rhang\TRF@rhang\dimen@\fi%
+    \advance\TRF@rhang-\TRF@lhang%
+    \advance\TRF@rhang-\wd\TRF@denombox%
+    \global\TRF@rhang\TRF@rhang%
+    \mathinner{%
+      \ifTRF@outer%
+        \raise\fontdimen22\textfont\tw@\vtop%
+      \else%
+        \vbox%
+      \fi%
+      {%
+        \offinterlineskip%
+        \hbox{%
+          \vbox{%
+            \dimen@\fontdimen8\textfont\tw@%
+            \advance\dimen@-\fontdimen22\textfont\tw@%
+            \advance\dimen@-.5\fontdimen8\textfont\thr@@%
+            \advance\dimen@-\dp\TRF@numbox%
+            \ifdim\dimen@<3\fontdimen8\textfont\thr@@%
+              \dimen@3\fontdimen8\textfont\thr@@%
+            \fi%
+            \advance\dimen@\trtopgap%
+            \hbox{\kern\TRF@ni\unhbox\TRF@numbox}%
+            \kern\dimen@%
+            \hbox{%
+              \kern\TRF@bi%
+              \vrule\@width\TRF@bw%
+                    \@height.5\fontdimen8\textfont\thr@@%
+                    \@depth.5\fontdimen8\textfont\thr@@%
+              \vbox{%
+                \dimen@.5\ht\TRF@eqbox%
+                \advance\dimen@.5\dp\TRF@eqbox%
+                \kern-\dimen@%
+                \box\TRF@eqbox%
+                \kern-\dimen@%
+              }%
+            }%
+          }%
+        }%
+        \dimen@\fontdimen11\textfont\tw@%
+        \advance\dimen@\fontdimen22\textfont\tw@%
+        \advance\dimen@-.5\fontdimen8\textfont\thr@@%
+        \advance\dimen@-\ht\TRF@denombox%
+        \ifdim\dimen@<3\fontdimen8\textfont\thr@@%
+          \dimen@3\fontdimen8\textfont\thr@@%
+        \fi%
+        \advance\dimen@\trbotgap%
+        \kern\dimen@%
+        \hbox{\kern\TRF@lhang\box\TRF@denombox}%
+      }%
+    }%
+    \ifTRF@outer\else%
+      \penalty\TRF@endp\relax%
+    \fi%
+    \global\TRF@lhang\ifTRF@first\TRF@lhang\else\TRF@lsave\fi%
+  \endgroup%
+}
+\newcommand\trfrac[3][]{%
+  \ifTRF@derivok%
+    \ifmmode%
+      \TRF@trfrac{#1}{#2}{#3}%
+    \else%
+      \TRF@mmerr%
+    \fi%
+  \else%
+    \TRF@derr%
+  \fi%
+}
+\newcommand\TRF@mmerr{%
+  \PackageError{trfrac}{\protect\trfrac\space%
+     only allowed in math mode}%
+    {I encountered a \protect\trfrac\space%
+     macro without first encountering a begin-math token.}%
+}
+\newcommand\TRF@derr{%
+  \PackageError{trfrac}{\protect\trfrac\space%
+     not allowed in the consequent of another \protect\trfrac}%
+    {\protect\trfrac\space can only appear in the premise (numerator%
+     ) of another \protect\trfrac, not in the consequent (denominator%
+     ) of a \protect\trfrac.}%
+}
+\newcommand\TRF@next{}
+\newcommand\TRF@sep{\futurelet\TRF@next\TRF@@sep}
+\newcommand\TRF@@sep{%
+  \ifx[\TRF@next%
+    \let\TRF@next\TRF@separg%
+  \else%
+    \let\TRF@next\TRF@sepnoarg%
+  \fi%
+  \TRF@next%
+}
+\newcommand\TRF@separg{}
+\def\TRF@separg[#1]{\cr\noalign{\kern#1}}
+\newcommand\TRF@sepnoarg{\cr}
+\newenvironment{trgather}{%
+  \vbox\bgroup%
+    \let\\\TRF@sep%
+    \ialign\bgroup\hfil{\m@th$##$}\hfil\cr%
+}{%
+  \crcr\egroup\egroup%
+}
+\newenvironment{tralign}{%
+  \vbox\bgroup%
+    \let\\\TRF@sep%
+    \ialign\bgroup\hfil{\m@th$##\null$}&{\m@th$\null##$}\hfil\cr%
+}{%
+  \crcr\egroup\egroup%
+}
+\endinput
+%%
+%% End of file `trfrac.sty'.
