@@ -480,10 +480,10 @@ nodes, as follows:
   represents the node type (2 bits), whether its ports are pointers or unboxed
   numbers (3 bits, 1 unused), and the operation (27 bits).
 
-- `OP2`: represented by 4 consecutive uints. The first 2 represent the `main`,
-  `aux0` and `aux1` ports. The third represents the stored number. The last one
-  represents the node type (2 bits), whether its ports are pointers or unboxed
-  numbers (3 bits), and the operation (27 bits).
+- `OP2`: represented by 4 consecutive uints. The first 3 represent the `main`,
+  `aux0` and `aux1` ports. The last one represents the node type (2 bits),
+  whether its ports are pointers or unboxed numbers (3 bits), and the operation
+  (27 bits).
 
 - `ITE`: represented by 4 consecutive uints. The first 2 represent the `main`,
   `aux0` and `aux1` ports. The third represents the stored number. The last one
