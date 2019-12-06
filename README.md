@@ -639,7 +639,7 @@ smart-contract platform.
 ## Moonad
 
 Moonad is an user-facing application that combines all the systems above in an
-unified package that just works. We call is an operatinig system in the sense
+unified package that just works. We call it an operating system in the sense
 it is capable of scheduling and running applications, but it isn't one in the
 traditional sense; as in, you won't be able to boot from it. It can be seen as
 a sandboxed application platform.
