@@ -10,7 +10,7 @@ system based on interaction nets. Moonad's purely functional user-facing
 language, **Formality** features a powerful, elegant type-system capable of
 stating and proving theorems about its own programs through inductive
 λ-encodings. Online interactions are made through **Trellis**, a global
-append-only event-log compatible with both trusted and decentralizd backends.
+append-only event-log compatible with both trusted and decentralized backends.
 On top of those, we build a front-end interface, **Moonad**, where users can
 create, deploy and use decentralized applications (Forall), pose and solve
 mathematical problems (Provit), and exchange scarce virtual assets (Phos).
@@ -104,7 +104,7 @@ type systems.
 As programmers and as mathematicians, we don't want to compromise.
 On one side, mathematicians have the power of rigor: there is nothing more
 undeniably correct than a mathematical proof. Yet ironically, those proofs are
-often written, checked and reviewed by humans in an extremelly error-prone
+often written, checked and reviewed by humans in an extremely error-prone
 process. On the other side, programmers have the power of automation: there is
 nothing more capable of performing a huge set of tasks without making a single
 mistake than a computer program. Yet, equally ironically, most of those programs
@@ -114,7 +114,7 @@ developers are capable of implementing everyday algorithms and data structures,
 but it is also a proof language, on which mathematicians are capable of
 proposing and proving theorems.
 
-Formality's types can be seen as a language of specfications that can be
+Formality's types can be seen as a language of specifications that can be
 mechanically checked by the compiler, allowing you to enforce arbitrary
 guarantees on your program's behavior. For example, in an untyped language, you
 could write an algorithm such as:
@@ -165,7 +165,7 @@ controller won't push its nose down to a crashing position. Of course, you
 don't *need* to write types so precise. If your software doesn't demand
 security, you could go all way down to having fully untyped programs. The point
 is that the ability of expressing properties so precisely is immensely
-valuable, specially when developing critical software that demands all the
+valuable, especially when developing critical software that demands all the
 security one can afford.
 
 ---
@@ -262,8 +262,8 @@ affine lambdas, allowing it to be garbage-collection-free. It has a strongly
 confluent interaction-net runtime, allowing it to be evaluated in massively
 parallel architectures. It is a functional language that doesn’t require bruijn
 bookkeeping, making it the fastest “closure chunker” around. It is lazy, has a
-clear cost model for blockchains and a minuscle (448 LOC) runtime, making it
-extremelly portable.
+clear cost model for blockchains and a minuscule (448 LOC) runtime, making it
+extremely portable.
 
 If we designed our operating system using a language like C, it'd be fast
 today, but, on the long-term, it would become obsolete. Instead, we decided to
@@ -626,7 +626,7 @@ Trellis is an append-only event-log divided into distinct labeled streams.
 ## Forall: a global repository of knowledge
 
 TODO: types are theorems, programs are proofs, files are papers, imports are
-citations. Forall is a both a package manager and a substitute for academic
+citations. Forall is both a package manager and a substitute for academic
 publishing, where code can be used in mathematical publications, and proofs can
 be used in code.
 
@@ -638,7 +638,7 @@ smart-contract platform.
 
 ## Moonad
 
-Moonad is an user-facing application that combines all the systems above in an
+Moonad is a user-facing application that combines all the systems above in an
 unified package that just works. We call it an operating system in the sense
 it is capable of scheduling and running applications, but it isn't one in the
 traditional sense; as in, you won't be able to boot from it. It can be seen as
